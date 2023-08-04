@@ -1,0 +1,43 @@
+@small-height:24px;
+@medium-height:32px;
+@large-height:40px;
+
+.A187-button {
+    display: inline-block;
+    border-radius: 10px;
+    font-size: 18px;
+    border-color: #2681ff;
+    background-color: #2681ff;
+    color: white;
+}
+
+
+.buttonLargeSize {
+    .setSize(@large-height)
+}
+
+.buttonMediumSize {
+    .setSize(@medium-height)
+}
+
+.buttonSmallSize {
+    .setSize(@small-height)
+}
+
+
+.setSize(@height:@medium-height) {
+    height: @height;
+    line-height: @height;
+}
+
+.setSize(@height) when(@height=@small-height){
+    padding: 3px;
+}
+
+.setSize(@height) when(@height=@medium-height){
+    padding: 5px 15px 5px 15px;
+}
+
+.setSize(@height) when(@height=@large-height){
+    padding: 5px 20px 5px 20px;
+}
