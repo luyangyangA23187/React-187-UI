@@ -1,0 +1,146 @@
+@import '/src/utils/style.less';
+
+.A187-button {
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    font-weight: lighter;
+    border: solid 1px;
+    transition-duration: 0.2s;
+    text-align: center;
+    &:hover {
+        cursor: pointer;
+    }
+    //添加动效
+    .setClickShadow(@defaultColor);
+    span{
+        display: inline-block;
+    }
+    .loadingAnimation{
+        .MovetoCenter();
+        border-radius: 50%;
+        border: 4px @prayColor;
+        border-top: solid;
+        border-right: solid;
+        animation: loading infinite 0.8s linear;
+    }
+}
+
+//旋转
+@keyframes loading {
+    0% {
+        transform: translate(-50%,-50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%,-50%) rotate(360deg);
+    }  
+}
+
+//按钮风格
+//主按钮
+.buttonPrimaryType {
+    .changeColor(@defaultColor,@defaultColor,@pureWhite);
+    border-color: @defaultColor;
+    background-color: @defaultColor;
+    color: white;
+    &:hover {
+        background-color: lighten(@defaultColor,10%);
+    }
+    //点击动效
+    .setClickAnimation()
+}
+
+//次按钮
+.buttonDefaultType {
+    .changeColor(@prayColor,@pureWhite,black);
+    &:hover {
+        color: @defaultColor;
+        border-color: @defaultColor;
+    }
+    //点击动效
+    .setClickAnimation()
+}
+
+//文本按钮
+.buttonTextType {
+    .changeColor(@opacityColor,@opacityColor,black);
+    &:hover {
+        background-color: @lightPray;
+    }
+    &:active {
+        background-color: darken(@lightPray,10%);
+    }
+}
+
+//链接按钮
+.buttonLinkType {
+    .changeColor(@opacityColor,@opacityColor,@defaultColor);
+    &:hover {
+        color: lighten(@defaultColor,10%);
+    }
+    &:active {
+        color: darken(@defaultColor,10%);
+    }
+}
+
+//禁用风格
+//有边框
+.buttonDisabledDefault {
+    border: solid 1px;
+    .changeColor(@prayColor, @lightPray, @prayColor);
+    &:hover {
+        cursor: not-allowed;
+    }
+}
+
+//无边框
+.buttonDisabledNoBorder {
+    .changeColor(@opacityColor, @opacityColor, @prayColor);
+    &:hover {
+        cursor: not-allowed;
+    }
+}
+
+
+//按钮大小
+.buttonLargeSize {
+    .setHeight(@large-height);
+    border-radius: @large-radius;
+}
+
+.buttonMediumSize {
+    .setHeight(@medium-height);
+    border-radius: @medium-radius;
+}
+
+.buttonSmallSize {
+    .setHeight(@small-height);
+    border-radius: @small-radius;
+}
+
+//按钮大小自适应
+.buttonAdaptSize {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    bottom: 0%;
+    right: 0%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: @large-radius;
+}
+
+
+.setHeight(@height) when(@height=@small-height){
+    padding: 0px 5px 0px 5px;
+    border-radius: 5px;
+}
+
+.setHeight(@height) when(@height=@medium-height){
+    padding: 0px 12.5px 0px 12.5px;
+}
+
+.setHeight(@height) when(@height=@large-height){
+    padding: 0px 20px 0px 20px;
+}

@@ -1,0 +1,60 @@
+@import '../utils/style.less';
+.A187-switch {
+    display: inline-flex;
+    position: relative;
+    vertical-align: middle;
+    align-items: center;
+    border: 3px solid;
+    border-radius: 22px;
+    min-width: 44px;
+    height: 22px;
+    transition-duration: 1s;
+    span {
+        display: inline-block;
+        min-width: 22px;
+        text-align: center;
+    }
+    .switch-circle {
+        background-color: @pureWhite;
+        height: 18px;
+        width: 18px;
+        border: 1px solid @pureWhite;
+        border-radius: 50%;
+    }
+}
+
+//开关
+.switch-on {
+    .changeColor(@defaultColor,@defaultColor,@pureWhite);
+    flex-direction: row;
+}
+
+.switch-off {
+    .changeColor(@prayColor,@prayColor,@pureWhite);
+    flex-direction: row-reverse;
+}
+
+//启用开关
+.switch-allowed {
+    //添加动效
+    .setClickShadow(@defaultColor);
+    .setClickAnimation();
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+//禁用开关
+.switch-on-disabled {
+    .changeColor(lighten(@defaultColor,10%),lighten(@defaultColor,10%),@pureWhite);
+    &:hover {
+        cursor: not-allowed;
+    }
+}
+
+.switch-off-disabled {
+    .changeColor(lighten(@prayColor,10%),lighten(@prayColor,10%),@pureWhite);
+    &:hover {
+        cursor: not-allowed;
+    }
+}

@@ -1,0 +1,55 @@
+@small-height:24px;
+@medium-height:32px;
+@large-height:40px;
+@small-radius:5px;
+@medium-radius:8px;
+@large-radius:10px;
+@opacityColor:rgba(255,255,255,1);
+@pureWhite:white;
+@defaultColor:#2681ff;
+@dangerColor:#f64441;
+@prayColor:#CCCCCC;
+@lightPray:#EEEEEE;
+
+//移至中心
+.MovetoCenter(){
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.setHeight(@height:@medium-height) {
+    height: @height;
+    line-height: @height;
+}
+
+//改变颜色
+.changeColor(@border-color,@background-color,@content-color) {
+    border-color: @border-color;
+    background-color: @background-color;
+    color: @content-color;
+}
+
+//添加动效
+.setClickShadow(@shadow-color){
+    &::after {
+        content: '';
+        inset:0;
+        position: absolute;
+        border-radius: inherit;
+        opacity: 0;
+        box-shadow: 0 0 0 8px @shadow-color;
+        transition: .5s;
+    }
+}
+
+//添加动效
+//点击水波纹
+.setClickAnimation() {
+    &:active::after {
+        box-shadow: none;
+        opacity: 1;
+        transition: 0s;
+    }
+}

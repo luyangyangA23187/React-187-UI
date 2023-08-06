@@ -1,0 +1,35 @@
+@import '../utils/style.less';
+
+
+.A187-input {
+    vertical-align: middle;
+    box-sizing: border-box;
+    font-size: 18px;
+    font-weight: lighter;
+    border-radius: 10px;
+    border: solid 1px @prayColor;
+    transition-duration: 0.3s;
+    &:hover {
+        border-color: @defaultColor;
+    }
+    &:focus {
+        border-color: @defaultColor;
+        outline: @defaultColor;
+        box-shadow: 0 0 3px @defaultColor;
+    }
+    &::placeholder {
+        color: @prayColor;
+    }
+}
+
+.input-small-size {
+    .setHeight(@small-height)
+}
+
+.input-medium-size {
+    .setHeight(@medium-height)
+}
+
+.input-large-size {
+    .setHeight(@large-height)
+}
