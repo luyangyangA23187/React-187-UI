@@ -28,8 +28,6 @@ const Input:FC<Iporps> = (props) => {
 
     if(value && value!==inputValue) setInputValue(value)
 
-    if(props.children) console.log(props.children)
-
   return (
     <div>
         <input className={classNamestr.join(' ')} type={type} 

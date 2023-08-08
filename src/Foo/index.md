@@ -127,10 +127,39 @@ export default () =>(
         <div>
         <Input placeholder='请输入'></Input>
         </div>
-        <div>内置按钮</div>
-        <div>
-        <Input placeholder='请输入'><Button type='primary'></Button></Input>
-        </div>
     </div>
 ) 
+```
+
+## Popover
+气泡框
+```jsx
+import { Popover } from '187-UI'
+import { Button } from '187-UI'
+const content = (<div>
+            <div>111111111</div>
+            <div>可以可以可以</div>
+    </div>)
+export default () => (
+    <div>
+        <div>默认</div>
+        <div>
+        <Popover content={content}>
+            <Button>Popover</Button>
+        </Popover>
+        </div>
+        <div>弹出位置</div>
+        <div>
+        <Popover content={content} placement='bottom' title='标题'>
+            <Button>Popover</Button>
+        </Popover>
+        </div>
+        <div>触发方式</div>
+        <div>
+        <Popover content={content} placement='bottom' title='标题' trigger='hover'>
+            <Button>Hover me</Button>
+        </Popover>
+        </div>
+    </div>
+)
 ```
