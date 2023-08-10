@@ -1,0 +1,40 @@
+@import '/src/utils/style.less';
+
+.A187-selectList {
+    position: relative;
+}
+
+.A187-selectListItem {
+    padding: 10px;
+    font-size: 17px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+//可点击
+.A187-selectListItem-allowed {
+    background-color: @pureWhite;
+    &:hover {
+        background-color: darken(@pureWhite,10%);
+        cursor: pointer;
+    }
+}
+
+//不可点击
+.A187-selectListItem-disabled {
+    background-color: @pureWhite;
+    color: @prayColor;
+    &:hover {
+        cursor: not-allowed;
+    }
+}
+
+//已选择
+.A187-selectListItem-active {
+    background-color: lighten(@defaultColor,35%);
+    color: @defaultColor;
+    &:hover {
+        background-color: lighten(@defaultColor,30%);
+        cursor: pointer;
+    }
+}

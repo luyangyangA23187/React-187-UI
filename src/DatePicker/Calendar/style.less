@@ -1,0 +1,56 @@
+@import '/src/utils/style.less';
+
+//日历切换月日
+.A187-calendar-change {
+    display: flex;
+    justify-content: space-between;
+    line-height: 32px;
+    width: 252px;
+}
+
+//日历表格
+.A187-calendar-table {
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: 252px;
+    height: 252px;
+    font-weight: 400;
+    font-size: 14px;
+    text-align: center;
+    .td{
+        height: 36px;
+        width: 36px; 
+    }
+}
+
+.A187-calendar-cell {
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    margin-left: 4px;
+    padding: 2px;
+    border-radius: 6px;
+    background-color: @pureWhite;
+    
+}
+
+.calendar-cell-thisMouth {
+    color: black;
+    &:hover {
+        background-color: darken(@pureWhite,5%);
+        cursor: pointer;
+    }
+}
+
+.calendar-cell-notThisMouth {
+    color: @prayColor;
+    &:hover {
+        background-color: darken(@pureWhite,5%);
+        cursor: pointer;
+    }
+}
+
+.calendar-cell-active {
+    background-color: @defaultColor;
+    color: @pureWhite;
+}

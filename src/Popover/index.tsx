@@ -7,22 +7,30 @@ interface Iporps{
     content:React.JSX.Element|ReactNode,
     title?:string,
     trigger?:triggerType,
-    placement?:bubblePositionType
+    placement?:bubblePositionType,
+    padding?:string,
+    display?:string,
+    show?:boolean
 }
 
 const Popover:FC<Iporps> = (props) => {
 
+    let {children,content,title,trigger,placement,padding,display,show} = props
     //展示气泡框
     const [isShow,setisShow] = useState<boolean>(false)
+    //props中是否有show
+    if(show!==undefined && show!==isShow) setisShow(show)
     //给移入触发用的计时器,避免气泡消失太快
     const [leaveTimer,setLeaveTimer] = useState<any>()
-
-    let {children,content,title,trigger,placement} = props
-
+    
 
     //默认参数
     trigger = trigger?trigger:'click'
     placement = placement?placement:'top'
+    padding = padding?padding:'12px'
+    display = display?display:'inline-block'
+    const bubbleStyle = {'padding':padding}
+    const boxStyle = {'display':display}
 
     useEffect(()=>{
         //点击气泡外则隐藏气泡
@@ -63,12 +71,12 @@ const Popover:FC<Iporps> = (props) => {
 
   return (
     <div className='A187-popover' onClick={(e)=>{e.nativeEvent.stopImmediatePropagation()}}
-        onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-        {isShow&&<div className={`A187-popover-bubble A187-bubble-${placement}`}>
+        onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} style={boxStyle}>
+        {isShow&&<div className={`A187-popover-bubble A187-bubble-${placement}`} style={bubbleStyle}>
             {title&&<div style={{marginBottom:'10px'}}><b>{title}</b></div>}
             {content}
         </div>}
-        <div className='A187-popover-content' 
+        <div className='A187-popover-content'
         onClick={onClick} onFocus={onFocus} onBlur={onBlur}>
             {children}
         </div>

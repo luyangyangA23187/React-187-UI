@@ -163,3 +163,136 @@ export default () => (
     </div>
 )
 ```
+
+## Dropdown
+下拉菜单
+```jsx
+import {Dropdown} from '187-UI'
+const items=[
+    {
+        label:'1',
+        uniqueKey:1,
+    },
+    {
+        label:'22222',
+        uniqueKey:2,
+    },
+    {
+        label:'disabled',
+        uniqueKey:3,
+        disabled:true,
+    }
+]
+
+export default () => (
+    <div>
+        <div>默认</div>
+        <div>
+        <Dropdown items={items} onClick={(e,key,label)=>{console.log(key,label)}}>
+            Dropdown
+        </Dropdown>
+        </div>
+        <div>可选择</div>
+        <div>
+        <Dropdown items={items} selectable={true}>
+            Dropdown
+        </Dropdown>
+        </div>
+    </div>
+)
+```
+多级菜单
+```jsx
+import {Dropdown} from '187-UI'
+const items=[
+    {
+        label:'1',
+        uniqueKey:1,
+    },
+    {
+        label:'22222',
+        uniqueKey:2,
+        children:[
+            {
+                label:'1111',
+                uniqueKey:21
+            },
+            {
+                label:'1111',
+                uniqueKey:22
+            },
+            {
+                label:'1111',
+                uniqueKey:23,
+                children:[
+                     {
+                        label:'1111',
+                        uniqueKey:231
+                    },
+                    {
+                        label:'1111',
+                        uniqueKey:232
+                    }
+                ]
+            },
+        ]
+    },
+    {
+        label:'disabled',
+        uniqueKey:3,
+        disabled:true,
+    }
+]
+
+export default () => (
+    <div>
+        <div>默认</div>
+        <div>
+        <Dropdown items={items} onClick={(e,key,label)=>{console.log(key,label)}}>
+            Dropdown
+        </Dropdown>
+        </div>
+    </div>
+)
+```
+
+```jsx
+import {Dropdown} from '187-UI'
+const items=[]
+const secondItems = []
+for(let i=0;i<10;i++){
+    items.push({label:'11111',key:i})
+    secondItems.push({label:'11111',key:i})
+}
+items[0]['children'] = secondItems
+
+export default () => (
+    <div>
+        <div>下拉菜单长度</div>
+        <div>
+        <Dropdown items={items} height='200px' onClick={(e,key,label)=>{console.log(key,label)}}>
+            Dropdown
+        </Dropdown>
+        </div>
+    </div>
+)
+
+```
+## DatePicker
+时间选择器
+```jsx
+import Calendar from '187-UI/DatePicker/Calendar/Calendar';
+import {DatePicker} from '187-UI';
+export default () => (
+    <div>
+        <div>日历</div>
+        <div>
+            <Calendar></Calendar>
+        </div>
+        <div>日期选择</div>
+        <div>
+            <DatePicker></DatePicker>
+        </div>
+    </div>
+    )
+```
