@@ -103,6 +103,14 @@ export default () => (
 ) 
 ```
 
+|属性|说明|类型|默认值|
+|:---|:--------------|:----------|:---|
+|onText|开关状态为开时的文本|string|无|
+|offText|开关状态为关时的文本|string|无|
+|onClick|点击开关时的回调函数|(checked:boolean,e:Event)=>void|无|
+|checked|开关状态|boolean|无|
+|disabled|禁用开关|boolean|false|
+
 ## Input
 输入框
 ```jsx
@@ -130,6 +138,16 @@ export default () =>(
     </div>
 ) 
 ```
+
+|属性|说明|类型|默认值|
+|:---|:--------------|:----------|:---|
+|size|输入框的大小|large/medium/small|medium|
+|value|输入框的值|string|无|
+|defaultValue|输入框初始值|string|无|
+|placeholder|输入框提示|string|无|
+|width|设置输入框的宽|string|25px|
+|onClick|点击输入框的回调|function(e)|无|
+|onChange|输入框变化时的回调|function(e)|无|
 
 ## Popover
 气泡框
@@ -163,6 +181,15 @@ export default () => (
     </div>
 )
 ```
+|属性|说明|类型|默认值|
+|:---|:--------------|:----------|:---|
+|children|插槽，会作为气泡框的触发元素|ReactNode/ReactNode[]|无|
+|content|气泡框中的内容|ReactNode/ReactNode[]|无|
+|title|标题|string|无|
+|trigger|气泡框触发方式|click/hover/focus|click|
+|placement|气泡框出现位置|top/topLeft/topRight/leftTop等12个字符串|top|
+|padding|设置padding|string|12px|
+|show|气泡框是否展示|boolean|无|
 
 ## Dropdown
 下拉菜单
@@ -244,6 +271,7 @@ const items=[
     }
 ]
 
+
 export default () => (
     <div>
         <div>默认</div>
@@ -255,29 +283,23 @@ export default () => (
     </div>
 )
 ```
+Dropdown属性
+|属性|说明|类型|默认值|
+|:---|:--------------|:----------|:---|
+|children|插槽,会作为下拉菜单的出发啊元素|ReactNode|无|
+|items|下拉菜单渲染元素|对象数组,对象类型见Item属性|无|
+|onClick|点击下拉菜单选项时触发的事件|(e:Event,key:strig/number,label:string)|无|
+|trigger|下拉菜单触发方式|click/hover/focus|click|
+|selectable|设置为真后被选择的选项会高亮|boolean|false|
 
-```jsx
-import {Dropdown} from '187-UI'
-const items=[]
-const secondItems = []
-for(let i=0;i<10;i++){
-    items.push({label:'11111',key:i})
-    secondItems.push({label:'11111',key:i})
-}
-items[0]['children'] = secondItems
+Dropdown item属性
+|属性|说明|类型|默认值|
+|:---|:--------------|:----------|:---|
+|label(必填)|下拉菜单选项|string|无|
+|uniqueKey(必填)|用于渲染,确保在items中独一无二|string/number|无|
+|onClick|点击下拉菜单选项时触发的事件|(e:Event,key:strig/number,label:string),会使Dropdown中的onClick失效|无|
+|children|多级菜单|items|无|
 
-export default () => (
-    <div>
-        <div>下拉菜单长度</div>
-        <div>
-        <Dropdown items={items} height='200px' onClick={(e,key,label)=>{console.log(key,label)}}>
-            Dropdown
-        </Dropdown>
-        </div>
-    </div>
-)
-
-```
 ## DatePicker
 时间选择器
 ```jsx
@@ -285,10 +307,6 @@ import Calendar from '187-UI/DatePicker/Calendar/Calendar';
 import {DatePicker} from '187-UI';
 export default () => (
     <div>
-        <div>日历</div>
-        <div>
-            <Calendar></Calendar>
-        </div>
         <div>日期选择</div>
         <div>
             <DatePicker></DatePicker>
@@ -296,3 +314,9 @@ export default () => (
     </div>
     )
 ```
+|属性|说明|类型|默认值|
+|:---|:--------------|:----------|:---|
+|size|输入框的大小|small/medium/large|medium|
+|width|输入框宽度|string|150px|
+|placement|日历出现位置|top/topLeft/topRight/leftTop等12个字符串|topLeft|
+|onClick|点击日期的回调函数|(e:Event,date:sting)=>void|无|

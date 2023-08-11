@@ -1,6 +1,7 @@
 type sizeType = 'small'|'medium'|'large';
 type triggerType = 'click'|'hover'|'focus'
-type bubblePositionType = 'top'|'topLeft'|'topRight'|'bottom'|'bottomLeft'|'bottomRight'|'rightTop'
+type bubblePositionType = 'top'|'topLeft'|'topRight'|'bottom'|'bottomLeft'|'bottomRight'|'rightTop'|
+'right'|'rightBottom'|'leftTop'|'left'|'leftBottom'
 interface ISelectListItem{
     label:string,
     uniqueKey:number|string

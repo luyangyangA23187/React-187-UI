@@ -8,8 +8,6 @@ const SelectList:FC<ISelectList> = (props) => {
 
     let {items,onClick,selectable,activeKey,setActive} = props
 
-    let style = {}
-
     const content = items.map(item=>{
         const res =  <Item label={item.label} key={item.uniqueKey} uniqueKey={item.uniqueKey} 
         disabled={item.disabled} active={activeKey===item.uniqueKey}
@@ -34,7 +32,7 @@ const SelectList:FC<ISelectList> = (props) => {
         })
 
   return (
-    <div className='A187-selectList' style={style}>
+    <div className='A187-selectList'>
         {content}
     </div>
   )

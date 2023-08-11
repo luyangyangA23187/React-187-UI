@@ -9,13 +9,15 @@ interface Iprops{
     onClick?:Function,
     placement?:bubblePositionType,
     size?:sizeType
+    width?:string
 }
 
 const DatePicker:FC<Iprops> = (props) => {
 
-    let {onClick,placement,size} = props
+    let {onClick,placement,size,width} = props
     placement = placement?placement:'bottomLeft'
     size = size?size:'medium'
+    width = width?width:'150px'
 
     useEffect(()=>{
         document.addEventListener('click',()=>{setShow(false)})
@@ -40,9 +42,11 @@ const DatePicker:FC<Iprops> = (props) => {
   return (
     <Popover content={content} placement={placement} show={show}>
         <Input value={curDate.format('YYYY-MM-DD')} size={size}
-        onClick={()=>setShow(true)} width='150px'></Input>
+        onClick={()=>setShow(true)} width={width}></Input>
     </Popover>
   )
 }
+
+
 
 export default DatePicker
