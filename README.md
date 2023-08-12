@@ -6,6 +6,7 @@
 + 开关(Switch)
 + 输入框(Input)
 + 气泡框(Popover)
++ 时间选择框(DataPicker)
 
 ## 按钮
 |属性|说明|类型|默认值|
