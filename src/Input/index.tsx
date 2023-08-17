@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './style.less'
 import {type sizeType} from '../utils/config'
 import { type FC } from 'react'
+import { classNames } from '187-UI/utils/classNames'
 
 type inputType='text'|'password'
 
@@ -18,30 +19,36 @@ interface Iporps{
 
 const Input:FC<Iporps> = (props) => {
 
-    let {size,value,defaultValue,type,placeholder,onClick,onChange,width} = props
-    size = size?size:'medium'
-    type = type?type:'text'
-    value = value?value:undefined
-    onClick = onClick?onClick:function(e:any){}
-    defaultValue = defaultValue?defaultValue:''
+    const {size,value,defaultValue,type,placeholder,onClick,onChange,width} = props
 
-    width = width?width:'225px'
+    const [inputValue,setInputValue] = useState<string>(defaultValue!)
 
-    let classNamestr = ['A187-input','input-medium-size','text']
-    classNamestr[1] = `input-${size}-size`
-    classNamestr[2] = type
+    const showContent = value===undefined?inputValue:value
 
-    const [inputValue,setInputValue] = useState<string>(value===undefined?defaultValue:value)
+    const classNamestr = classNames('Input',{
+        size:size
+    })
 
-    if(value!==undefined&&inputValue!==value) setInputValue(value)
+    const inputStyle = {
+        width:width
+    }
 
   return (
-        <input className={classNamestr.join(' ')} type={type} onClick={(e)=>onClick!(e)}
-        value={inputValue} placeholder={placeholder} style={{'width':width}} onChange={(e)=>{
+        <input className={classNamestr} type={type} onClick={(e)=>onClick!(e)}
+        value={showContent} placeholder={placeholder} style={inputStyle} onChange={(e)=>{
             if(value===undefined) setInputValue(e.target.value)
             if(onChange) onChange(e)
         }}/>
   )
+}
+
+Input.defaultProps = {
+    size:'medium',
+    type:'text',
+    value:undefined,
+    onClick:function(e:any){},
+    defaultValue:'',
+    width:'225px',
 }
 
 export default Input
