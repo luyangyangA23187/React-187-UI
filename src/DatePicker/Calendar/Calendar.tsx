@@ -2,6 +2,7 @@ import React, { useState,type FC } from 'react'
 import dayjs from 'dayjs'
 import './style.less'
 import Button from '187-UI/Button'
+import { classNames } from '187-UI/utils/classNames'
 
 interface Iprops{
     selectedDate:string,
@@ -14,6 +15,8 @@ const Calendar:FC<Iprops> = (props) => {
 
     //给定月份的第一天
     const [base,setBase] = useState<dayjs.Dayjs>(dayjs(selectedDate).date(1))
+    //改变基准日期
+    if(dayjs(selectedDate).date(1).diff(base.date(1))) setBase(dayjs(selectedDate).date(1))
     //日期
     const box = getClendarBox(base)
 
@@ -24,11 +27,15 @@ const Calendar:FC<Iprops> = (props) => {
     //表格内容
     const cell = (date:string)=>{
         const curMonth = base.month()+1
-        let className = 'A187-calendar-cell'
+
+        //得到目标日期
         const [year,month,day] = date.split('-').map(e=>parseInt(e))
-        if(date==selectedDate) className+= ' ' + 'calendar-cell-active'
-        else if(month==curMonth) className+=' ' + 'calendar-cell-thisMouth'
-        else className+=' ' + 'calendar-cell-notThisMouth'
+
+        const className = classNames('CalendarCell',{
+            inThisMonth:month==curMonth,
+            active:date==selectedDate,
+        })
+
         return (
             <td key={date}>
                 <div className={className} onClick={(e)=>onClick(e,date)}>

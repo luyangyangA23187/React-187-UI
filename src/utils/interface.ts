@@ -30,7 +30,35 @@ interface popoverBubblePrefix {
     placement?:string
 }
 
+//下拉菜单选项
+interface dropdownItemPrefix {
+    disabled?:boolean
+    active?:boolean
+}
+//下拉菜单物品参数
+interface ISelectListItem extends dropdownItemPrefix{
+    label:string,
+    uniqueKey:number|string
+    children?:ISelectListItem[]
+    onClick?:(e:React.MouseEvent<HTMLDivElement,MouseEvent>,key:string|number,label:string)=>void
+}
+interface ISelectList {
+    items:ISelectListItem[]
+    selectable?:boolean,
+    setActive?:Function,
+    onClick?:(e:React.MouseEvent<HTMLDivElement,MouseEvent>,key:string|number,label:string)=>void
+    activeKey?:number|string,
+}
+
+//日历
+interface calendarCellPrefix {
+    active?:boolean,
+    inThisMonth?:boolean,
+}
+
 
 export {buttonPrefix,sizeType,buttonStyleType,
     switchPrefix,inputPrefix,
-    bubblePositionType,triggerType,popoverBubblePrefix}
+    bubblePositionType,triggerType,popoverBubblePrefix,
+    dropdownItemPrefix,ISelectListItem,ISelectList,
+    calendarCellPrefix}

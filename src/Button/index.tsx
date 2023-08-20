@@ -12,7 +12,7 @@ interface Iporps extends buttonPrefix{
 
 const Button:FC<Iporps> = (props) => {
 
-    let {size,fontSize,type,disabled,loading,onClick} = props
+    const {size,fontSize,type,disabled,loading,onClick} = props
 
     const classNameStr = classNames('Button',{
         size:size,
@@ -29,7 +29,7 @@ const Button:FC<Iporps> = (props) => {
   return (
     <div className={classNameStr} onClick={(e)=>{
         //禁用则不触发点击事件
-        if(!disabled && onClick) onClick(e)
+        if(!disabled && !loading&& onClick) onClick(e)
     }} >
         {loading&&<div className='loadingAnimation' style={{'width':fontSize,'height':fontSize}}></div>}
         <span style={spanStyle}>{props.children}</span>

@@ -1,5 +1,5 @@
 import React,{type FC,ReactNode, useState, MouseEvent, useEffect} from 'react'
-import type { bubblePositionType, triggerType } from '187-UI/utils/config';
+import type { bubblePositionType, triggerType } from '187-UI/utils/interface';
 import './style.less'
 import { popoverBubblePrefix } from '187-UI/utils/interface';
 import { classNames } from '187-UI/utils/classNames';

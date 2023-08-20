@@ -1,12 +1,13 @@
-import { ISelectList, ISelectListItem } from '187-UI/utils/config'
+import { ISelectList, ISelectListItem } from '187-UI/utils/interface'
 import React ,{type FC,useState} from 'react'
 import './style.less'
 import Popover from '187-UI/Popover'
+import { classNames } from '187-UI/utils/classNames'
 
 
 const SelectList:FC<ISelectList> = (props) => {
 
-    let {items,onClick,selectable,activeKey,setActive} = props
+    const {items,onClick,selectable,activeKey,setActive} = props
 
     const content = items.map(item=>{
         const res =  <Item label={item.label} key={item.uniqueKey} uniqueKey={item.uniqueKey} 
@@ -42,23 +43,25 @@ const SelectList:FC<ISelectList> = (props) => {
 
 const Item:FC<ISelectListItem> = (props)=>{
 
-    let {label,disabled,uniqueKey,onClick,active} = props
-    disabled = disabled?disabled:false
-    onClick = onClick?onClick:function(e,key,label){}
+    const {label,disabled,uniqueKey,onClick,active} = props
 
-    let classNameStr = ['A187-selectListItem','A187-selectListItem-allowed']
-
-    if(disabled) classNameStr[1] = 'A187-selectListItem-disabled'
-    else if(active) classNameStr[1] = 'A187-selectListItem-active'
+    const classNameStr = classNames('DropDownItem',{
+        disabled:disabled,
+        active:active
+    })
 
     return (
-        <div className={classNameStr.join(' ')} key={uniqueKey} onClick={(e)=>{
+        <div className={classNameStr} key={uniqueKey} onClick={(e)=>{
             if(disabled) return
             if(onClick) onClick(e,uniqueKey,label)
         }}>
             {label}
         </div>
     )
+}
+
+Item.defaultProps = {
+    disabled:false
 }
 
 export default SelectList

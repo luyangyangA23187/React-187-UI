@@ -3,7 +3,7 @@ import Popover from '187-UI/Popover'
 import React,{useState,useEffect,type FC} from 'react'
 import Calendar from './Calendar/Calendar'
 import dayjs from 'dayjs'
-import { bubblePositionType, sizeType } from '187-UI/utils/config'
+import { bubblePositionType, sizeType } from '187-UI/utils/interface'
 
 interface Iprops{
     onClick?:Function,
@@ -15,16 +15,16 @@ interface Iprops{
 const DatePicker:FC<Iprops> = (props) => {
 
     let {onClick,placement,size,width} = props
-    placement = placement?placement:'bottomLeft'
-    size = size?size:'medium'
-    width = width?width:'150px'
 
     useEffect(()=>{
+        //绑定监听事件
         document.addEventListener('click',()=>{setShow(false)})
     },[])
 
+    //控制气泡框的开关
     const [show,setShow] = useState<boolean>(false)
 
+    //点击日历中日期的回调事件
     const handleClick = (e:any,date:string)=>{
         //改变当前日期
         setCurDate(dayjs(date))
@@ -45,6 +45,12 @@ const DatePicker:FC<Iprops> = (props) => {
         onClick={()=>setShow(true)} width={width}></Input>
     </Popover>
   )
+}
+
+DatePicker.defaultProps = {
+    placement:'bottomLeft',
+    size:'medium',
+    width:'150px',
 }
 
 

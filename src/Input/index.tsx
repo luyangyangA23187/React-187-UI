@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './style.less'
-import {type sizeType} from '../utils/config'
+import {type sizeType} from '../utils/interface'
 import { type FC } from 'react'
 import { classNames } from '187-UI/utils/classNames'
 
