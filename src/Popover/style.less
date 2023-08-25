@@ -13,77 +13,72 @@
     0 9px 28px 8px rgba(0,0,0,.05);
     background-color: @pureWhite;
     z-index: 100;
-}
-
-.A187-bubble-show {
-    scale: 1;
-}
-
-.A187-bubble-hide {
-    scale: 0;
+    height: 0;
+    overflow: hidden;
+    transition: all 0.5s;
 }
 
 //气泡出现位置
 .A187-bubble-top {
     left: 50%;
-    transform: translate(-50%,-105%);
+    transform: translate(-50%,-100%);
 }
 
 .A187-bubble-topLeft {
     left: 0%;
-    transform: translate(0%,-105%);
+    transform: translate(0%,-100%);
 }
 
 .A187-bubble-topRight {
     right: 0%;
-    transform: translate(0%,-105%);
+    transform: translate(0%,-100%);
 }
 
 .A187-bubble-bottom {
     left: 50%;
     bottom: 0%;
-    transform: translate(-50%,105%);
+    transform: translate(-50%,100%);
 }
 
 .A187-bubble-bottomLeft {
     left: 0%;
     bottom: 0%;
-    transform: translate(0%,105%);
+    transform: translate(0%,100%);
 }
 
 .A187-bubble-bottomRight {
     right: 0%;
     bottom: 0%;
-    transform: translate(0%,105%);
+    transform: translate(0%,100%);
 }
 
 .A187-bubble-rightTop {
     right: 0%;
-    transform: translate(105%,0%);
+    transform: translate(100%,0%);
 }
 
 .A187-bubble-right {
     right: 0%;
     top: 50%;
-    transform: translate(105%,-50%);
+    transform: translate(100%,-50%);
 }
 
 .A187-bubble-rightBottom {
     right: 0%;
     bottom: 0%;
-    transform: translate(105%,0%);
+    transform: translate(100%,0%);
 }
 
 .A187-bubble-leftTop {
-    transform: translate(-105%,0%);
+    transform: translate(-100%,0%);
 }
 
 .A187-bubble-left {
     top: 50%;
-    transform: translate(-105%,-50%);
+    transform: translate(-100%,-50%);
 }
 
 .A187-bubble-leftBottom {
     bottom: 0%;
-    transform: translate(-105%,0%);
+    transform: translate(-100%,0%);
 }

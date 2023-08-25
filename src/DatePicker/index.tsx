@@ -14,7 +14,7 @@ interface Iprops{
 
 const DatePicker:FC<Iprops> = (props) => {
 
-    let {onClick,placement,size,width} = props
+    const {onClick,placement,size,width} = props
 
     useEffect(()=>{
         //绑定监听事件
@@ -31,7 +31,7 @@ const DatePicker:FC<Iprops> = (props) => {
         //展示日历
         setShow(false)
         //回调时间
-        if(onClick) onClick()
+        if(onClick) onClick(e,date)
     }
 
     //选定日期

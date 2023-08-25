@@ -72,9 +72,7 @@ function getInputClass(params:inputPrefix){
 function getPopoverBubbleClass(params:popoverBubblePrefix){
     const {show,placement} = params
 
-    let classNameStr = ['A187-popover-bubble','A187-bubble-hide',`A187-bubble-${placement}`]
-
-    if(show === true) classNameStr[1] = 'A187-bubble-show'
+    let classNameStr = ['A187-popover-bubble',`A187-bubble-${placement}`]
 
     return classNameStr.join(' ')
 }

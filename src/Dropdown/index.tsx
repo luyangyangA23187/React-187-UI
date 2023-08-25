@@ -1,5 +1,5 @@
 import Popover from '187-UI/Popover'
-import { ISelectList, ISelectListItem, triggerType } from '187-UI/utils/config'
+import { ISelectList, ISelectListItem, triggerType } from '187-UI/utils/interface'
 import React,{type FC,ReactNode,useState} from 'react'
 import SelectList from './SelectList'
 import './style.less'

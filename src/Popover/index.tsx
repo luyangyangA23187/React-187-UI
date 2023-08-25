@@ -1,4 +1,4 @@
-import React,{type FC,ReactNode, useState, MouseEvent, useEffect} from 'react'
+import React,{type FC,ReactNode, useState, MouseEvent, useEffect, useRef} from 'react'
 import type { bubblePositionType, triggerType } from '187-UI/utils/interface';
 import './style.less'
 import { popoverBubblePrefix } from '187-UI/utils/interface';
@@ -15,13 +15,32 @@ interface Iporps extends popoverBubblePrefix{
 
 const Popover:FC<Iporps> = (props) => {
 
-    let {children,content,title,trigger,placement,padding,display,show} = props
+    const {children,content,title,trigger,placement,padding,display,show} = props
+
     //展示气泡框
     const [isShow,setisShow] = useState<boolean>(false)
-    //给移入触发用的计时器,避免气泡消失太快
-    const [leaveTimer,setLeaveTimer] = useState<any>()
+    //拿到气泡框DOM节点便于做动画效果
+    let bubbleDiv = useRef<HTMLDivElement|null>(null)
     
     const showBubble = show === undefined?isShow:show
+
+    const element = bubbleDiv.current
+
+    //动画效果
+    if (element && showBubble) {
+        element.style.height = 'auto'
+        const { height } = element.getBoundingClientRect()
+        element.style.height = '0'
+        element.offsetHeight
+        element.style.height = height + 'px'
+        element.style.opacity = '1'
+        element.style.overflow = 'visible';
+    }
+    if (element && !showBubble) {
+        element.style.height = '0'
+        element.style.opacity = '0'
+        element.style.overflow = 'hidden'
+    }
 
     //默认参数
     const bubbleClassName = classNames('PopoverBubble',{
@@ -57,23 +76,21 @@ const Popover:FC<Iporps> = (props) => {
     //移入触发
     const onMouseEnter = ()=>{
         if(trigger!=='hover') return
-        if(leaveTimer){
-            clearTimeout(leaveTimer)
-            setLeaveTimer(null)
-        }
         setisShow(true)
     }
     const onMouseLeave = ()=>{
         if(trigger!=='hover') return
-        setLeaveTimer(setTimeout(()=>setisShow(false),100))
+        setisShow(false)
     }
 
   return (
     <div className='A187-popover' onClick={(e)=>{e.nativeEvent.stopImmediatePropagation()}}
-        onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} style={boxStyle}>
-        <div className={bubbleClassName} style={bubbleStyle}>
-            {title&&<div style={{marginBottom:'10px'}}><b>{title}</b></div>}
-            {content}
+        onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} style={boxStyle} >
+        <div className={bubbleClassName} ref={bubbleDiv}>
+            <div style={bubbleStyle}>
+                {title&&<div style={{marginBottom:'10px'}}><b>{title}</b></div>}
+                {content}
+            </div> 
         </div>
         <div className='A187-popover-content'
         onClick={onClick} onFocus={onFocus} onBlur={onBlur}>
