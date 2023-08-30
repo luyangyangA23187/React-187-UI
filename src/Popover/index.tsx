@@ -3,6 +3,7 @@ import type { bubblePositionType, triggerType } from '187-UI/utils/interface';
 import './style.less'
 import { popoverBubblePrefix } from '187-UI/utils/interface';
 import { classNames } from '187-UI/utils/classNames';
+import { usePropsState } from '187-UI/utils/utils';
 
 interface Iporps extends popoverBubblePrefix{
     children:ReactNode|ReactNode[],
@@ -18,11 +19,10 @@ const Popover:FC<Iporps> = (props) => {
     const {children,content,title,trigger,placement,padding,display,show} = props
 
     //展示气泡框
-    const [isShow,setisShow] = useState<boolean>(false)
+    const [showBubble,setisShow,isShow] = usePropsState<boolean>(show,false)
     //拿到气泡框DOM节点便于做动画效果
     let bubbleDiv = useRef<HTMLDivElement|null>(null)
-    
-    const showBubble = show === undefined?isShow:show
+
 
     const element = bubbleDiv.current
 

@@ -3,6 +3,7 @@ import './style.less'
 import {type sizeType} from '../utils/interface'
 import { type FC } from 'react'
 import { classNames } from '187-UI/utils/classNames'
+import { usePropsState } from '187-UI/utils/utils'
 
 type inputType='text'|'password'
 
@@ -21,9 +22,8 @@ const Input:FC<Iporps> = (props) => {
 
     const {size,value,defaultValue,type,placeholder,onClick,onChange,width} = props
 
-    const [inputValue,setInputValue] = useState<string>(defaultValue!)
-
-    const showContent = value===undefined?inputValue:value
+    //决定是受控组件还是非受控组件
+    const [showContent,setInputValue,inputValue] = usePropsState<string>(value,defaultValue!)
 
     const classNamestr = classNames('Input',{
         size:size
