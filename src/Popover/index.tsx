@@ -3,7 +3,7 @@ import type { bubblePositionType, triggerType } from '187-UI/utils/interface';
 import './style.less'
 import { popoverBubblePrefix } from '187-UI/utils/interface';
 import { classNames } from '187-UI/utils/classNames';
-import { usePropsState } from '187-UI/utils/utils';
+import { popOvertoBody, usePropsState } from '187-UI/utils/utils';
 
 interface Iporps extends popoverBubblePrefix{
     children:ReactNode|ReactNode[],
@@ -22,25 +22,7 @@ const Popover:FC<Iporps> = (props) => {
     const [showBubble,setisShow,isShow] = usePropsState<boolean>(show,false)
     //拿到气泡框DOM节点便于做动画效果
     let bubbleDiv = useRef<HTMLDivElement|null>(null)
-
-
-    const element = bubbleDiv.current
-
-    //动画效果
-    if (element && showBubble) {
-        element.style.height = 'auto'
-        const { height } = element.getBoundingClientRect()
-        element.style.height = '0'
-        element.offsetHeight
-        element.style.height = height + 'px'
-        element.style.opacity = '1'
-        element.style.overflow = 'visible';
-    }
-    if (element && !showBubble) {
-        element.style.height = '0'
-        element.style.opacity = '0'
-        element.style.overflow = 'hidden'
-    }
+    let wrapDiv = useRef<HTMLDivElement|null>(null)
 
     //默认参数
     const bubbleClassName = classNames('PopoverBubble',{
@@ -50,13 +32,46 @@ const Popover:FC<Iporps> = (props) => {
     const bubbleStyle = {'padding':padding}
     const boxStyle = {'display':display}
 
+    //仅在第一次创建组件触发
     useEffect(()=>{
         //点击气泡外则隐藏气泡
-        document.addEventListener('click',()=>{
+        const clickHideEvent = ()=>{
             if(trigger!=='click') return
             setisShow(false)
-        })
+        }
+        document.addEventListener('click',clickHideEvent)
+        return ()=>{
+            document.removeEventListener('click',clickHideEvent)
+        }
+
+        
     },[])
+    //每次更新都会触发
+    useEffect(()=>{
+        if(!bubbleDiv.current) return
+        if(showBubble){
+            const element = bubbleDiv.current
+            //先挂到popover上找位置
+            element.style.removeProperty('left')
+            element.style.removeProperty('top')
+            element.style.removeProperty('transform')
+            element.style.height = 'fit-content'
+            element.offsetHeight
+            wrapDiv.current!.appendChild(element)
+            //挂载到body上
+            popOvertoBody(element)
+            //做动画
+            const { height } = element.getBoundingClientRect()
+            element.style.height = '0'
+            element.offsetHeight
+            element.style.height = height + 'px'
+        }
+        else{
+            //重新挂载到节点上
+            const element = bubbleDiv.current
+            element.style.height = '0px'
+        }
+    })
 
     //触发方式
     //点击触发
@@ -85,8 +100,8 @@ const Popover:FC<Iporps> = (props) => {
 
   return (
     <div className='A187-popover' onClick={(e)=>{e.nativeEvent.stopImmediatePropagation()}}
-        onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} style={boxStyle} >
-        <div className={bubbleClassName} ref={bubbleDiv}>
+        onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} style={boxStyle} ref={wrapDiv}>
+        <div className={bubbleClassName} ref={bubbleDiv} >
             <div style={bubbleStyle}>
                 {title&&<div style={{marginBottom:'10px'}}><b>{title}</b></div>}
                 {content}

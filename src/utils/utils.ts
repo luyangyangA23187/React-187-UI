@@ -24,5 +24,18 @@ function moveAnimation(dom:HTMLElement|null,duration:number,preLeft?:number,preT
     return [preLeft-nextLeft,preTop-nextTop]
 }
 
+//把一个节点挂载到body上并且不改变位置
+function popOvertoBody(dom:HTMLElement){
+    const rect = dom.getBoundingClientRect()
+    const left = scrollX + rect.left
+    const top = scrollY + rect.top
+    const root = document.querySelector('#root')!
+    root.appendChild(dom)
+    dom.style.left = left + 'px'
+    dom.style.top = top + 'px'
+    dom.style.transform = 'translate(0,0)'
+    
+}
 
-export {moveAnimation,usePropsState}
+
+export {moveAnimation,usePropsState,popOvertoBody}

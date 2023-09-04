@@ -172,6 +172,11 @@ export default () => (
             <Button>Popover</Button>
         </Popover>
         </div>
+        <div>
+        <Popover content={content} placement='rightTop' title='标题'>
+            <Button>Popover</Button>
+        </Popover>
+        </div>
         <div>触发方式</div>
         <div>
         <Popover content={content} placement='bottom' title='标题' trigger='hover'>

@@ -24,8 +24,8 @@ const SelectList:FC<ISelectList> = (props) => {
         if(item.children){
             //多级菜单
             let nextContent = <SelectList items={item.children} onClick={onClick}></SelectList>
-            return <Popover placement="rightTop" content={nextContent}
-            trigger='hover' padding='5px' display='block'>
+            return <Popover placement='rightTop' content={nextContent} display='block'
+            trigger='hover' padding='5px'>
                 {res}
             </Popover>
         }
@@ -55,7 +55,7 @@ const Item:FC<ISelectListItem> = (props)=>{
             if(disabled) return
             if(onClick) onClick(e,uniqueKey,label)
         }}>
-            {label}
+            {label} 
         </div>
     )
 }
